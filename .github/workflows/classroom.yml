@@ -18,11 +18,19 @@ jobs:
       uses: classroom-resources/autograding-python-grader@v1
       with:
         timeout: 10
-        max-score: 10
+        max-score: 50
+        setup-command: sudo -H pip3 install pytest
+    - name: test26
+      id: test26
+      uses: classroom-resources/autograding-python-grader@v1
+      with:
+        timeout: 10
+        max-score: 23
         setup-command: sudo -H pip3 install pytest
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         TEST25_RESULTS: "${{steps.test25.outputs.result}}"
+        TEST26_RESULTS: "${{steps.test26.outputs.result}}"
       with:
-        runners: test25
+        runners: test25,test26
